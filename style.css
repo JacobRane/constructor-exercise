@@ -1,0 +1,179 @@
+body,html {
+    margin: 0;
+    height: 100%
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between
+}
+
+* {
+    font-family: Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif
+}
+
+.header {
+    font-weight: 700;
+    width: 100%;
+    box-shadow: 0 5px 20px -10px #000;
+    position: relative;
+    z-index: 10
+}
+
+.header h1 {
+    margin-left: 15%;
+    font-size: 2.5rem
+}
+
+.footer,.middle {
+    background-color: #ececec
+}
+
+.footer {
+    height: 70px;
+    position: relative;
+    bottom: 0
+}
+
+.footer img {
+    height: 70px;
+    box-sizing: content-box
+}
+
+.footer div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5%
+}
+
+.footer a {
+    display: flex;
+    font-size: large;
+    font-weight: 700;
+    text-decoration: none;
+    color: #000
+}
+
+.footer a div {
+    width: 120px
+}
+
+.middle {
+    flex: auto;
+    display: flex;
+    flex-direction: column
+}
+
+.middle .addBookButton {
+    width: 130px;
+    align-self: center;
+    margin-top: 2%;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    border: 0;
+    box-shadow: 0 0 5px 0;
+    border-radius: 10px;
+    padding: 5px;
+    position: sticky;
+    top: 5px;
+    background-color: white;
+}
+
+.middle .addBookButton:hover {
+    background-color: #e4e4e4
+}
+
+.middle .addBookButton div {
+    font-size: 2rem
+}
+
+.books {
+    display: grid;
+    width: 70%;
+    align-self: center;
+    height: 100%;
+    margin-top: 3%;
+    margin-bottom: 1%;
+    gap: 1.1rem;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    grid-template-rows: repeat(auto-fill, 1fr);
+}
+
+.books div {
+    width: minmax(fit-content, 1fr);
+    background-color: white;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 10px -5px;
+    border-radius: 10px;
+    font-size: 1rem;
+    height: fit-content;
+}
+
+.books h1 {
+    font-size: 1.2rem;
+}
+
+.books h1,
+.books p {
+    width: fit-content;
+}
+
+.addNewBookDiv {
+    width: 300px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px 0px;
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+.addNewBookForm {
+    flex-direction: column;
+    display: flex;
+}
+
+.addNotRead {
+    background-color: red;
+
+    color: white;
+    border: 1px solid black;
+    margin-top: 5%;
+    border-radius: 5px;
+    width: 70%;
+    align-self: center;
+    padding: 10px;
+    font-size: large;
+    font-weight: bold;
+}
+
+.addNewBookForm label {
+    font-weight: bold;
+}
+
+.addNewBookForm input {
+    border-radius: 5px;
+    border: 1px solid rgb(22, 22, 22);
+    padding: 3px;
+}
+
+.addBookSubmit { 
+    align-self: center;
+    margin-top: 5%;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    border: 0;
+    box-shadow: 0 0 5px 0;
+    border-radius: 10px;
+    padding: 5px;
+    position: sticky;
+    top: 5px;
+    background-color: white;
+
+}
