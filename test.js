@@ -1,9 +1,5 @@
-// The user clicks the new book button
-// This brings up a form to input the book info
-// When the submit button is pressed. It scans the text content of each form item
-// When they submit this info it created an object thats pushed into the array
-// A loop scans through the array and displays all the books on the html
 let myLibrary = [];
+
 
 function book (title, author, pages, readOrNot) {
     this.title = title
@@ -14,12 +10,17 @@ function book (title, author, pages, readOrNot) {
 
 function addBookToLibrary(title, author, pages, readOrNot) {
     myLibrary.push(bookItem = new book(title, author, pages, readOrNot))
-    removeAllChildNodes(booksOnPage)
+    
     loopArrayThenDisplay()
 }
 
-const booksOnPage = document.querySelector('.books')
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
 
+const booksOnPage = document.querySelector('.books')
 function loopArrayThenDisplay() {
     removeAllChildNodes(booksOnPage)
     for (i = 0; i < myLibrary.length; i++) {
@@ -37,17 +38,45 @@ function loopArrayThenDisplay() {
 
         let bookPages = document.createElement('p')
         newDiv.appendChild(bookPages)
-        bookPages.textContent = myLibrary[i].pages
+        bookPages.textContent = `Pages: ${myLibrary[i].pages}`
 
-        let bookRead = document.createElement('p')
+        let bookRead = document.createElement('button')
         newDiv.appendChild(bookRead)
         bookRead.textContent = myLibrary[i].readOrNot
-    }
-}
+        if (myLibrary[i].readOrNot === 'Read') {
+            bookRead.style.backgroundColor = 'green'
+        }
+        else if (myLibrary[i].readOrNot === 'Not Read') {
+            bookRead.style.backgroundColor = 'red'
+        }
+        bookRead.classList.add(`bookReadOrNot${i}`)
+        bookRead.addEventListener('click', function() {
+            if (this.textContent === 'Read') {
+                this.textContent = 'Not Read'
+                let classToNumber = this.parentElement.className
+                let classToNumber2 = classToNumber.replace(/\D/g,'')
+                myLibrary[`${classToNumber2}`].readOrNot = 'Not Read'
+                this.style.backgroundColor = 'red'
+            }
+            else if (this.textContent = 'Not Read') {
+                this.textContent = 'Read'
+                let classToNumber = this.parentElement.className
+                let classToNumber2 = classToNumber.replace(/\D/g,'')
+                myLibrary[`${classToNumber2}`].readOrNot = 'Read'
+                this.style.backgroundColor = 'green'
+            }
+        })
 
-function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
+        let bookRemove = document.createElement('button')
+        newDiv.appendChild(bookRemove)
+        bookRemove.classList.add(`remove${i}`)
+        bookRemove.textContent = 'Remove'
+        bookRemove.addEventListener('click', function() {
+            let current = this.className
+            let newThingTemp = current.replace(/\D/g,'')
+            myLibrary.splice(`${newThingTemp}`, (`${newThingTemp}` + 1) )
+            this.parentElement.remove()
+        })
     }
 }
 
@@ -69,11 +98,19 @@ readOrNotButton.addEventListener('click', function() {
 const addNewBookDiv = document.querySelector('.addNewBookDiv')
 const addBookButton = document.querySelector('.addBookButton')
 addBookButton.addEventListener('click', function() {
-  if (addNewBookDiv.style.display === "block") {
+  const addTitle = document.querySelector('.addTitle')
+  addTitle.value = null;
+  const addAuthor = document.querySelector('.addAuthor')
+  addAuthor.value = null;
+  const addPages = document.querySelector('.addPages')
+  addPages.value = null;
+  
+    if (addNewBookDiv.style.display === "block") {
     addNewBookDiv.style.display = "none";
   } else {
     addNewBookDiv.style.display = "block";
   }
+  
 })
 
 // prevent submit button
@@ -84,5 +121,16 @@ function checkboxClick(event) {
 }
 
 submitButton.addEventListener("click", function() {
-    
+    addBookToLibrary(
+        document.querySelector('.addTitle').value,
+        document.querySelector('.addAuthor').value,
+        document.querySelector('.addPages').value,
+        document.querySelector('.addNotRead').textContent,
+    )
+    addNewBookDiv.style.display = "none"
+    readOrNotButton.textContent = 'Not Read'
+    readOrNotButton.style.backgroundColor = 'red'
+    readOrNotvalue = 0;
 })
+
+
